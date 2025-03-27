@@ -14,15 +14,15 @@
 		<form> 
 			<input type="text" class="container-box" id="search-box-input" 
 				placeholder="Search for a city..." autocomplete="off" value="" 
-				onKeyUp="showResults(this.value)" size="100"> 
-			<button type="button" onclick="refresh()" id="search-button"></button>
+				size="100"> 
+			<button type="button" id="search-button"></button>
 		</form>
 		<div class="container-box" id="main-container">
     		<div id="weather-box">
 				<div id="weather-details-wrapper">
         			<table id="weather">
         	    		<td id="temperature"></td>
-						<td> <button id="temp-grades" onclick="changeGrades()">°C</button></td>
+						<td> <button id="temp-grades">°C</button></td>
         	    		<td> <img src="https://openweathermap.org/img/wn/02d@2x.png" id="icon"></td>
         			</table>
 					<span class="weather-text" id="condition-text"> </span>
@@ -41,7 +41,9 @@
 		
 		
     </div>
-
-    <script src="index.js"></script>
+	
+	<script type="module" src="./env.js"></script>
+    <script type="module" src="./index.js"></script>
+	
 </body>
 </html>

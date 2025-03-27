@@ -1,23 +1,33 @@
-const { apiKeys } = require('/env');
+import { apiKeys } from './env.js';
 
-
-const search_terms = ['apple', 'apple watch', 'apple macbook', 'apple macbook pro', 'iphone', 'iphone 12'];
-
-let input = document.getElementById("search-box-input");
 let search_cities = [];
 let weather = {}
 
 let temp_grades = "celsius"
 
-input.focus();
-input.select();
+document.addEventListener('DOMContentLoaded', () => {
+    // Search input
+    const searchInput = document.getElementById('search-box-input');
+    searchInput.addEventListener('keyup', (e) => showResults(e.target.value));
+    searchInput.addEventListener('keypress', (e) => {
+        if(e.key == "Enter") {
+            e.preventDefault();
+            document.getElementById("search-button").click();
+        }
+    });
+    
+    // Search button
+    const searchButton = document.getElementById('search-button');
+    searchButton.addEventListener('click', refresh);
+    
+    // Temperature grades button
+    const tempGradesButton = document.getElementById('temp-grades');
+    tempGradesButton.addEventListener('click', changeGrades);
+});
 
-input.addEventListener("keypress", function(event) {
-    if(event.key == "Enter") {
-        event.preventDefault();
-        document.getElementById("search-button").click();
-    }
-})
+window.showResults = showResults;
+window.refresh = refresh;
+window.changeGrades = changeGrades;
 
 //--------------------------------------------------------------//
 
@@ -39,7 +49,7 @@ function autocompleteMatch(input) {
       return [];  
     } else document.getElementById("autocomplete-box").style.display = "block";
 
-    geolocation = `http://api.weatherapi.com/v1/search.json?key=${apiKeys.weatherAPI}&q=${input}`;
+    const geolocation = `http://api.weatherapi.com/v1/search.json?key=${apiKeys.weatherAPI}&q=${input}`;
     fetch(geolocation).then(response => response.json()).then(response => fillCitiesAutocomplete(response, input));
     console.log(search_cities);
     return search_cities;
@@ -52,39 +62,25 @@ function fillCitiesAutocomplete(data, input) {
 }
 
 function showResults(val) {
-    res = document.getElementById("autocomplete-box");
+    const res = document.getElementById("autocomplete-box");
     res.innerHTML = '';
     let list = '';
     let terms = autocompleteMatch(val);
 
-    for (i = 0; i < terms.length; i++) {
+    for (let i = 0; i < terms.length; i++) {
       list += '<li>' + terms[i] + '</li>';
     }
     if(list) {
         res.innerHTML = '<ul>' + list + '</ul>';    
-    } else 
+    } else {
         res.style.display = "none";
+    }
 
     search_cities = [];
   }
 
-function getJSONfromUrl(url, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "json";
-    xhr.onload = function() {
-        let status = xhr.status;
-        if(status == 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status);
-        }
-    };
-    xhr.send();
-} 
 
-function selecWeahertBoxGradient (weather, hour) {
-
+function selecWeatherBoxGradient (weather, hour) {
     console.log(weather.main);
     if (weather.main == "Rain") {
         document.getElementById("weather-box").style.background = "var(--rain-weather-gradient)";
@@ -96,13 +92,6 @@ function selecWeahertBoxGradient (weather, hour) {
 }
 
 function updatePage(data) {
-    let weather = {
-        conditon: data[0].weather[0].description,
-        temperature: (data[0].main.temp - 273.15).toFixed(0), 
-        icon: data[0].weather[0].icon,
-        main: data[0].weather[0].main
-    };
-
     weather = {
         condition: data[1].current.condition.text,
         temperature: { temp_c: data[1].current.temp_c, temp_f: data[1].current.temp_f},
