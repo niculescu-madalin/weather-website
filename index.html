@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://openweathermap.org/img/wn/02d@2x.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather</title>
+
+</head>
+<body>
+    <div class="flex">
+		<form> 
+			<input type="text" class="container-box" id="search-box-input" 
+				placeholder="Search for a city..." autocomplete="off" value="" 
+				onKeyUp="showResults(this.value)" size="100"> 
+			<button type="button" onclick="refresh()" id="search-button"></button>
+		</form>
+		<div class="container-box" id="main-container">
+    		<div id="weather-box">
+				<div id="weather-details-wrapper">
+        			<table id="weather">
+        	    		<td id="temperature"></td>
+						<td> <button id="temp-grades" onclick="changeGrades()">°C</button></td>
+        	    		<td> <img src="https://openweathermap.org/img/wn/02d@2x.png" id="icon"></td>
+        			</table>
+					<span class="weather-text" id="condition-text"> </span>
+					<div class="weather-text details-text"> Humidity: </div>
+					<div class="weather-text details-text"> Wind speed: </div>
+					<div class="weather-text details-text"> Presure: </div>
+				</div>
+				<div id="location">
+					<img src="assets/pin.png" id="location-pin-img"> 
+					<span id="location-text"></span>
+					<div id="time-text"></div>
+				</div>
+			</div>
+			<div class="container-box" id="autocomplete-box"></div>
+		</div>
+		
+		
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

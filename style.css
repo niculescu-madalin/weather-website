@@ -1,0 +1,220 @@
+html {
+    color-scheme: light dark;
+    overflow: hidden;
+}
+
+body {
+    font-family: system-ui;
+    background-image: url(https://images.unsplash.com/photo-1680324418862-2770e90e1d56);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+:root {
+    --day-weather-gradient: linear-gradient(119deg, rgba(0,157,255,1) 0%, rgba(0,204,255,1) 100%);
+    --night-weather-gradient: linear-gradient(119deg, rgba(92,0,125,1) 0%, rgba(12,0,64,1) 100%);
+    --sunset-weather-gradient: linear-gradient(119deg, rgba(156,6,6,1) 0%, rgba(255,206,0,1) 100%);
+    --rising-weather-gradient: linear-gradient(119deg, rgba(0,164,205,1) 0%, rgba(0,187,129,1) 100%);
+    --rain-weather-gradient: linear-gradient(90deg, rgba(21,54,69,1) 0%, rgba(80,111,112,1) 100%);
+}
+
+.content {
+    position: relative;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container-box {
+    border-radius: 10px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+    background-color: rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(26px) saturate(110%);
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 20px rgba(6, 27, 65, 0.2);
+    font-weight: 600;
+    margin: 5px;
+    position: relative;
+    max-width: 600px;
+    min-width: 300px;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    display: block;
+}
+
+#search-box-input {
+    max-width: 600px;
+    display: block;
+    height: 50px;
+    border: 0px;
+    font-size: 1.25rem;
+    flex-grow: 1;
+    font-weight: 500;
+    color: white;
+    text-indent: 20px;
+    margin: 0px;
+    margin-bottom: 2px;
+}
+
+#search-box-input:focus{
+    outline: solid 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(196, 196, 196, 0.3);;
+}
+
+#search-box-input::placeholder {
+    opacity: 60%;
+}
+
+#main-container {
+    height: 400px;
+    overflow: hidden;
+}
+
+#autocomplete-box {
+    padding-left: 20px;
+    margin: -20px;
+    margin-top: 0px;
+    background-color: rgba(255, 255, 255, 0.626);
+    color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+    overflow-x: hidden;
+    width: calc(100% - 20px);
+    margin-left: 0px;
+    min-width: inherit;
+    max-width: inherit;
+}
+
+#autocomplete-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    text-indent: 20px;
+}
+
+#autocomplete-box ul li {
+    padding: 5px 0;
+}
+
+#autocomplete-box ul li:hover {
+    background: rgba(160, 160, 160, 0.267);
+}
+
+#weather-box {
+    height: 100%;
+    position: absolute;
+    top:0;
+    display: block;
+    width: inherit;
+    min-width: inherit;
+    display: none;
+}
+
+#weather-details-wrapper {
+    width: calc(inherit - 20px);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#weather {
+    font-size: 5em;
+    text-align: left;
+}
+
+#icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 90px;
+    position: relative;
+    padding-top: 10px;
+}
+
+#temp-grades {
+    padding: 5px;
+    padding-bottom: 0px;
+    background-color: transparent;
+    border: 0px;
+    font-size: 0.6em;
+}
+
+#temp-grades:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+}
+
+
+#location {
+    width: inherit;
+    padding: 15px;
+    font-size: 1.25em;
+    position: absolute;
+    display: grid;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: white;
+    gap: 0px 10px;
+    justify-items: center;
+    grid-template-columns: 1fr 100%;
+    width: inherit;
+    height: auto;
+    min-width: inherit;
+}
+
+#location-pin-img {
+    grid-row: 1;
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+}
+
+#location-text {
+    justify-self: start;
+    grid-row: 1;
+    margin: 0px;
+    padding-right: 60px;
+}
+
+#time-text {
+    justify-self: start;
+    font-size: 0.9rem;
+    grid-row: 2;
+    grid-column: 2;
+    margin: 0px;
+    opacity: 50%;
+}
+
+#search-button {
+    background-color: transparent;
+    position: absolute;
+    visibility: hidden;
+}
+
+.weather-text {
+    position: relative;
+    left: 10px;
+    bottom: 10px;
+}
+
+.details-text {
+    font-size: 1.05em;
+    opacity: 80%;
+}
+
+#condition-text {
+    font-size: 1.5em;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 90%;
+}
+
